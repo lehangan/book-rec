@@ -1,6 +1,7 @@
 # Book Recommending System using AI
 ```diff
 - **TODO: fill this README.md with information from the .pdf and delete it _before 9/11_**
+Maybe branching (github) later
 ```
 
 
