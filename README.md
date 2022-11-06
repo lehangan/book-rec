@@ -1,6 +1,8 @@
 # Book Recommending System using AI
+```diff
+- **TODO: fill this README.md with information from the .pdf and delete it _before 9/11_**
+```
 
-**TODO: fill this README.md with information from the .pdf and delete it _before 9/11_**
 
 This project is developed in Python + ...
 Using the [Book-Crossing Dataset](http://www2.informatik.uni-freiburg.de/~cziegler/BX/).
