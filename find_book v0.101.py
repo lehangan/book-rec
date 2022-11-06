@@ -117,13 +117,13 @@ class app():
                 break
 
             if wd.event == 'Go':
-                uid = wd.values["-IN-"]
-                # loc = user.loc[user['User-ID'] == wd.values["-IN-"], 'Location'].values[0]
-                # age = user.loc[user['User-ID'] == wd.values["-IN-"], 'Age'].values[0]
-                # if age == "NULL": age = "Unknown"
-                # read = rating.loc[rating['User-ID'] == wd.values["-IN-"], 'ISBN'].values[0]
-                book = books.loc[books['ISBN'] == uid, 'Book-Title'].values[0]
-                [sg.popup( book)]
+                uid = int(wd.values["-IN-"])
+                loc = user.loc[user['User-ID'] == uid, 'Location'].values[0]
+                age = user.loc[user['User-ID'] == uid, 'Age'].values[0]
+                if age == "NULL": age = "Unknown"
+                read = rating.loc[rating['User-ID'] == uid, 'ISBN'].values[0]
+                # book = books.loc[books['ISBN'] == uid, 'Book-Title'].values[0]
+                [sg.popup( loc, age, read)]
                 
                 # wd.button_go(wd)
                 # try:
