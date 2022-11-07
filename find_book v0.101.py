@@ -75,8 +75,8 @@ class app():
         list_text = [
             [sg.Text("User ID:")],
             [sg.Input(size=(25, 1), enable_events=True, key="-IN-"), sg.Button('Go')],
-            [sg.Text("Information of the reader here:")],
-            [sg.Text(size= (25, 5), key="-UID-")],
+            # [sg.Text("Information of the reader here:")],
+            [sg.Text(size=(25, 7), key="-UID-")],
             
         ]
         list_img = [
@@ -120,10 +120,13 @@ class app():
                 uid = int(wd.values["-IN-"])
                 loc = user.loc[user['User-ID'] == uid, 'Location'].values[0]
                 age = user.loc[user['User-ID'] == uid, 'Age'].values[0]
-                if age == "NULL": age = "Unknown"
-                read = rating.loc[rating['User-ID'] == uid, 'ISBN'].values[0]
-                # book = books.loc[books['ISBN'] == uid, 'Book-Title'].values[0]
-                [sg.popup( loc, age, read)]
+                # if age == []: age = "Unknown"
+                read = str(rating.loc[rating['User-ID'] == uid, 'ISBN'].values[0])
+                book = books.loc[books['ISBN'] == read, 'Book-Title'].values[0]
+                Infor = "Location: \n"+ str(loc) +"\nAge: "+ str(age)+"\nBooks:" + str(book)
+                # [sg.popup(loc, age, read, book)]
+                wd.window["-UID-"].update(Infor)
+                
                 
                 # wd.button_go(wd)
                 # try:
@@ -141,6 +144,7 @@ class app():
         if age == "NULL": age = "Unknown"
         read = rating.loc[rating['User-ID'] == wd.values["-IN-"], 'ISBN'].values[0]
         book = books.loc[books['ISBN'] == read, 'Book-Title'].values[0]
+        
         [sg.popup(loc, age, book)]
         # wd.window['-UID-'].update(u_loc)
 
