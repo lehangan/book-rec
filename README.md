@@ -2,6 +2,12 @@
 ```diff
 - **TODO: fill this README.md with information from the .pdf and delete it _before 9/11_**
 Maybe branching (github) later
+
+
+Current problem:
+	File path may not work with linux (might need os.path.normpath(path))
+	UI not connected to any main program
+	Different python versions (ngan & hoang)
 ```
 
 
