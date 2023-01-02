@@ -64,4 +64,10 @@ user   = loaddata("../../BX-Users")
 rating = loaddata("../../BX-Book-Ratings")
 ```
 
+## User-Guide using Surprise 
+You just need to pass a sim_options argument at the creation of an algorithm. This argument is a dictionary with the following (all optional) keys:
+- 'name': The name of the similarity to use, as defined in the similarities module. Default is 'MSD'. ['cosine' , 'pearson', 'pearson_baseline', 'msd']
+- 'min-support' : [1,5]
+- 'user_based' : [True,False]
+
 
