@@ -6,54 +6,25 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QTableView
-from PyQt5.QtCore import QAbstractTableModel, Qt
-from PyQt5.QtNetwork import QNetworkAccessManager, QNetworkReply, QNetworkRequest
+from PyQt5 import QtCore, QtWidgets
+#from PyQt5.QtWidgets import QApplication, QTableView
+#from PyQt5.QtCore import QAbstractTableModel, Qt
+
 import sys
 import pandas as pd
 
+import requests
 
-from PIL import Image
-import requests
-from io import BytesIO
-from urllib.request import urlopen
-import PySimpleGUI as sg
-import random
-import re
-import PySimpleGUI as sg
-import PIL
-from PIL import Image
-import io
-import base64
-import random
-import pandas as pd
-import requests
-from io import BytesIO
-from urllib.request import urlopen
-import tkinter as tk
-from PIL import Image, ImageTk
-from urllib.request import urlopen
-import cv2
-import numpy as np
-import urllib.request
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel
 from PyQt5.QtGui import QImage, QPixmap
-from PyQt5.QtCore import pyqtSlot, Qt, QUrl
-from PyQt5.QtWidgets import (
-    QApplication,
-    QComboBox,
-    QLabel,
-    QMainWindow,
-    QVBoxLayout,
-    QWidget,
-)
 from langdetect import detect
-from langcodes import *
+from iso639 import languages
+#from langcodes import *
 
-books = pd.read_csv('BX-Books.csv' , encoding='latin-1' , on_bad_lines='skip' , sep=';' , low_memory=False, escapechar='\\')
-rating = pd.read_csv('BX-Book-Ratings.csv' , encoding='latin-1' , on_bad_lines='skip' , sep=';')
-user = pd.read_csv('BX-Users.csv' , encoding='latin-1' ,  on_bad_lines='skip' , sep=';')
+import readbookdataset
+books = readbookdataset.book
+user = readbookdataset.user
+rating = readbookdataset.rating
+
 
 BOOK = " "
 df = pd.DataFrame()
@@ -323,8 +294,6 @@ class Ui_MainWindow(object):
         self.lineEdit.returnPressed.connect(self.Block)
         self.tableWidget.selectionModel().selectionChanged.connect(self.onSelection)
         #self.tableWidget.selectionModel().selectionChanged.connect(self.bookShow)
-        self.manager = QNetworkAccessManager()
-        # self.manager.finished.connect(self.on_finished)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -376,7 +345,6 @@ class Ui_MainWindow(object):
         self.tableWidget_2.setColumnWidth(1,70)
         self.tableWidget_2.setColumnWidth(2,30)
         self.tableWidget_2.setColumnWidth(3,30)
-    
 
     def find(self, UID):
         dataset = pd.DataFrame()
@@ -402,7 +370,8 @@ class Ui_MainWindow(object):
                         try:
                             text = book +" "+ author +" "+ publisher
                             code = detect(text)
-                            lang=Language.make(language=code).display_name()
+                            lang = languages.make(alpha2=code).name
+                            
                         except:
                             pass
                         rates = rating.loc[rating['ISBN'] == isbn, 'Book-Rating']
@@ -426,29 +395,13 @@ class Ui_MainWindow(object):
         return dataset
 
     def onSelection(self, selected):
-        try:
-            for ix in selected.indexes():
-                x=ix.row()
-                y=ix.column()
-            a = self.tableWidget.item(int(x), int(y)).text()
-            self.label_19.setText(f"{str(a)}")
-            self.bookShow(a)
-        except:
-            print("Unknown selection!")
-            pass
+        for ix in selected.indexes():
+            x=ix.row()
+            y=ix.column()
+        a = self.tableWidget.item(int(x), int(y)).text()
+        self.label_19.setText(f"{str(a)}")
+        self.bookShow(a)
 
-    def image_show(self, url):
-        try:
-            image = QImage()
-            image.loadFromData(requests.get(url).content)
-            print(requests.get(url).content)
-            self.label_17.setPixmap(QPixmap(image))
-            self.label_17.show()
-        except:
-            print("error link: ", url)
-            self.label_17.setText(" ")
-            pass
-    
     def bookShow(self, book):
         try:
             rate = df.loc[df['book']==book, 'rate'].values[0]
@@ -458,13 +411,17 @@ class Ui_MainWindow(object):
             year = df.loc[df['book']==book, 'year'].values[0]
             publisher = df.loc[df['book']==book, 'publisher'].values[0]
             url = df.loc[df['book']==book, 'url'].values[0]
+            image = QImage()
+            image.loadFromData(requests.get(url).content)
+
             self.label_16.setText(f"{isbn}")
             self.label_12.setText(f"{rate}")
             self.label_14.setText(f"{lang}")
             self.label_21.setText(f"{author}")
             self.label_23.setText(f"{year}")
             self.label_25.setText(f"{publisher}")
-            self.image_show(url)
+            self.label_17.setPixmap(QPixmap(image))
+            self.label_17.show()
         except:
             self.label_19.setText(" ")
             self.label_16.setText(" ")
@@ -477,7 +434,6 @@ class Ui_MainWindow(object):
             pass
     
     def readTableRecent(self, dataFrame):
-            self.tableWidget.clear()
             B = pd.concat([dataFrame.loc[:,"book"]], axis=1)
             R = pd.concat([dataFrame.loc[:, "rate"]], axis=1)
             
@@ -494,9 +450,6 @@ class Ui_MainWindow(object):
                     self.tableWidget.setItem(row_numberR,1,QtWidgets.QTableWidgetItem(dataR))
                 except:
                     pass
-            for row, data in self.tableWidget.rowCount():
-                if data == None:
-                    self.tableWidget.removeRow(row)
 
     def Block(self):
         uid = self.lineEdit.text()
@@ -546,20 +499,10 @@ if __name__ == '__main__':
             font-size: 9pt;
             outline: none;
         }
-        QTableWidget
-        {
-            border: 1px #DADADA solid;
-            background: #262D37;
-            color: white;
-            selection-color: black;
-            selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,stop: 0 #FF92BB, stop: 1 white);
-        }
         QTableWidgetItem
         {
-            border: 1px #DADADA solid;
             background: #262D37;
             color: white;
-            selection-background-color: qlineargradient(x1: 0, y1: 0, x2: 0.5, y2: 0.5,stop: 0 #FF92BB, stop: 1 white);
         }
 
         QPushButton:hover{
