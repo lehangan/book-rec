@@ -7,7 +7,7 @@ A book Book Recommendation System which recommends the users a selection of book
 - Python: 3.10.8
 - Pandas: 1.5.2
 
-Installing required packages with `conda` (recommended):
+Installing required packages with `conda` in the terminal or an Anaconda Prompt (recommended):
 ```
 conda env create -f environment.yml
 conda activate book_rec_env
@@ -28,13 +28,24 @@ To start Jupyter Notebook:
 jupyter notebook
 ```
 
-## The dataset 
-http://www2.informatik.uni-freiburg.de/~cziegler/BX/
-Dataset contains 278,858 users (anonymized but with demographic information) providing 1,149,780 ratings (explicit & implicit) about 271,379 books.
+## The dataset
+[The Book-Crossing Dataset](http://www2.informatik.uni-freiburg.de/~cziegler/BX/) contains 278,858 users (anonymized but with demographic information) providing 1,149,780 ratings (explicit & implicit) about 271,379 books.
 The Book-Crossing dataset comprises of 3 tables.
 - BX-Users : Contains the users.
 - BX-Books : Books are identified by their respective ISBN. Invalid ISBNs have already been removed from the dataset. Moreover, some content-based information is given (`Book-Title`, `Book-Author`, `Year-Of-Publication`, `Publisher`),URLs linking to cover images are also given, appearing in three different sizes (`Image-URL-S`, `Image-URL-M`, `Image-URL-L`),
 - BX-Book-Ratings : Contains the book rating information. Ratings (`Book-Rating`) are either explicit, expressed on a scale from 1-10 (higher values denoting higher appreciation), or implicit, expressed by 0.
+
+
+## Using the program
+To predict the books that one user might like based on their preferences,
+you can use the following command to run the program in command-line:
+```
+python commandline.py
+```
+The value `user ID` will correspond to the first column in BX-Users file. The program will fail if the user selected hasn't rated enough book to make relevant prediction (> 100 ratings).
+In that case, the system will instead provide a list of valid `user ID` that can be inputted.
+The command-line program here uses KNNBasic algorithm from `SystemUsingSurprise-Sklearn.ipynb` jupyter notebook
+
 
 ## Libraries 
 ### Import libraries for dataset 
