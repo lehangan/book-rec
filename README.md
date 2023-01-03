@@ -7,28 +7,23 @@ A book Book Recommendation System which recommends the users a selection of book
 - Python: 3.10.8
 - Pandas: 1.5.2
 
-- Installing required packages with `conda`
+Installing required packages with `conda` (recommended)
 ```
+conda env create -f environment.yml
+conda activate book_rec_env
 conda update --all
-conda install notebook
-conda install numpy
-conda install pandas
-conda install seaborn
-conda install scipy
-conda install -c conda-forge scikit-learn
-conda install -c conda-forge scikit-surprise
-```
-If you're not using `conda`
-```
-pip install pandas
-pip install numpy
-pip install seaborn
-pip install matplotlib
-pip install sklearn
-pip install surprise
 ```
 
-To start jupyter:
+If you're not using `conda` (surprise package may not install)
+```
+pip install notebook
+pip install -r requirements.txt
+```
+requirements.txt created with:
+conda install -c conda-forge pipreqs
+
+
+To start Jupyter Notebook:
 ```
 jupyter notebook
 ```
@@ -46,16 +41,22 @@ The Book-Crossing dataset comprises 3 tables.
 - numpy 
 - seaborn
 - pandas
-- plotly
 - matplotlib (installed by seaborn)
+
+conda update --all
+conda install notebook
+conda install numpy
+conda install pandas
+conda install seaborn
+conda install scipy
+conda install -c conda-forge scikit-learn
+conda install -c conda-forge scikit-surprise
 
 ```python
 import numpy as np
 import seaborn as sns
 import pandas as pd
-import plotly.io as pio
 import matplotlib.pyplot as plt
-pio.renderers.default = "png"
 ```
 ### Import libraries for building system and evaluation 
 - sklearn
