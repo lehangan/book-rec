@@ -44,7 +44,7 @@ python commandline.py
 ```
 The value `user ID` will correspond to the first column in BX-Users file. The program will fail if the user selected hasn't rated enough book to make relevant prediction (> 100 ratings).
 In that case, the system will instead provide a list of valid `user ID` that can be inputted.
-The command-line program here uses KNNBasic algorithm from `SystemUsingSurprise-Sklearn.ipynb` jupyter notebook
+The command-line program here uses KNNBasic algorithm from [`SystemUsingSurprise-Sklearn.ipynb`](SystemUsingSurprise-Sklearn.ipynb) jupyter notebook
 
 
 ## Libraries 
