@@ -19,10 +19,9 @@ If you're not using `conda` (surprise package may not install):
 pip install notebook
 pip install -r requirements.txt
 ```
-file `requirements.txt` was created with [`pipreqs`](https://anaconda.org/conda-forge/pipreqs) package
-conda install -c conda-forge pipreqs
+The file `requirements.txt` was created with [`pipreqs`](https://anaconda.org/conda-forge/pipreqs) package.
 
-
+<br />
 To start Jupyter Notebook:
 ```
 jupyter notebook
