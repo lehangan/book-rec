@@ -7,5 +7,9 @@ Created on Tue Jan  3 23:28:21 2023
 
 from predictbasic import similarities, printRecommendations
 
-user_id = input("\nEnter user ID to get recommendation: ")
-print(printRecommendations(similarities, int(user_id), 40, 10))
+while 1:
+    print("\nEnter 0 to exit.")
+    user_id = input("Enter user ID to get recommendation: ")
+    if user_id == '0':
+        break
+    print(printRecommendations(similarities, int(user_id), 40, 10))
