@@ -7,19 +7,19 @@ A book Book Recommendation System which recommends the users a selection of book
 - Python: 3.10.8
 - Pandas: 1.5.2
 
-Installing required packages with `conda` (recommended)
+Installing required packages with `conda` (recommended):
 ```
 conda env create -f environment.yml
 conda activate book_rec_env
 conda update --all
 ```
 
-If you're not using `conda` (surprise package may not install)
+If you're not using `conda` (surprise package may not install):
 ```
 pip install notebook
 pip install -r requirements.txt
 ```
-requirements.txt created with:
+file `requirements.txt` was created with [`pipreqs`](https://anaconda.org/conda-forge/pipreqs) package
 conda install -c conda-forge pipreqs
 
 
