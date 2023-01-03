@@ -22,6 +22,7 @@ pip install -r requirements.txt
 The file `requirements.txt` was created with [`pipreqs`](https://anaconda.org/conda-forge/pipreqs) package.
 
 <br />
+
 To start Jupyter Notebook:
 ```
 jupyter notebook
