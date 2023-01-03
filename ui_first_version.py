@@ -294,8 +294,7 @@ class Ui_MainWindow(object):
         self.lineEdit.returnPressed.connect(self.Block)
         self.tableWidget.selectionModel().selectionChanged.connect(self.onSelection)
         #self.tableWidget.selectionModel().selectionChanged.connect(self.bookShow)
-        self.manager = QNetworkAccessManager()
-        # self.manager.finished.connect(self.on_finished)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
