@@ -3,15 +3,42 @@ A book Book Recommendation System which recommends the users a selection of book
 
 ## Environment
 - Anaconda : (link download https://www.anaconda.com/ )
-- Jupyternotebook
-- Python: x.x.x
+- Jupyter Notebook
+- Python: 3.10.8
+- Pandas: 1.5.2
+
+- Installing required packages with `conda`
+```
+conda update --all
+conda install notebook
+conda install numpy
+conda install pandas
+conda install seaborn
+conda install scipy
+conda install -c conda-forge scikit-learn
+conda install -c conda-forge scikit-surprise
+```
+If you're not using `conda`
+```
+pip install pandas
+pip install numpy
+pip install seaborn
+pip install matplotlib
+pip install sklearn
+pip install surprise
+```
+
+To start jupyter:
+```
+jupyter notebook
+```
 
 ## The dataset 
 http://www2.informatik.uni-freiburg.de/~cziegler/BX/
-Dataset contains 278,858 users (anonymized but with demographic information) providing 1,149,780 ratings (explicit / implicit) about 271,379 books.
+Dataset contains 278,858 users (anonymized but with demographic information) providing 1,149,780 ratings (explicit & implicit) about 271,379 books.
 The Book-Crossing dataset comprises 3 tables.
 - BX-Users : Contains the users.
-- BX-Books : Books are identified by their respective ISBN. Invalid ISBNs have already been removed from the dataset. Moreover, some content-based information is given (`Book-Title`, `Book-Author`, `Year-Of-Publication`, `Publisher`),URLs linking to cover images are also given, appearing in three different flavours (`Image-URL-S`, `Image-URL-M`, `Image-URL-L`),
+- BX-Books : Books are identified by their respective ISBN. Invalid ISBNs have already been removed from the dataset. Moreover, some content-based information is given (`Book-Title`, `Book-Author`, `Year-Of-Publication`, `Publisher`),URLs linking to cover images are also given, appearing in three different sizes (`Image-URL-S`, `Image-URL-M`, `Image-URL-L`),
 - BX-Book-Ratings : Contains the book rating information. Ratings (`Book-Rating`) are either explicit, expressed on a scale from 1-10 (higher values denoting higher appreciation), or implicit, expressed by 0.
 
 ## Libraries 
@@ -20,7 +47,7 @@ The Book-Crossing dataset comprises 3 tables.
 - seaborn
 - pandas
 - plotly
-- matplotlib
+- matplotlib (installed by seaborn)
 
 ```python
 import numpy as np
